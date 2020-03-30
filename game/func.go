@@ -3,10 +3,10 @@ package game
 import (
 	"encoding/json"
 
-	"github.com/YWJSonic/BaseServer/server"
 	"github.com/YWJSonic/GameServer/cyberpunk/game/gamerule"
 	"github.com/YWJSonic/ServerUtility/foundation"
 	"github.com/YWJSonic/ServerUtility/foundation/fileload"
+	"github.com/YWJSonic/ServerUtility/iserver"
 	"github.com/YWJSonic/ServerUtility/restfult"
 	"github.com/YWJSonic/ServerUtility/socket"
 )
@@ -16,7 +16,7 @@ func NewGameServer() {
 
 	jsStr := fileload.Load("./file/config.json")
 	config := foundation.StringToJSON(jsStr)
-	baseSetting := server.NewSetting()
+	baseSetting := iserver.NewSetting()
 	baseSetting.SetData(config)
 
 	gamejsStr := fileload.Load("./file/gameconfig.json")
@@ -25,7 +25,7 @@ func NewGameServer() {
 		panic(err)
 	}
 
-	var gameserver = server.NewService()
+	var gameserver = iserver.NewService()
 	var game = &Game{
 		IGameRule: gameRule,
 		Server:    gameserver,
