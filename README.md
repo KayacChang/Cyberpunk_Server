@@ -1,4 +1,4 @@
-[https://hackmd.io/jgCwoneZSsqh17mOaq_Q5w?both]https://hackmd.io/jgCwoneZSsqh17mOaq_Q5w?both
+[https://hackmd.io/jgCwoneZSsqh17mOaq_Q5w?both](https://hackmd.io/jgCwoneZSsqh17mOaq_Q5w?both)
 ---
 # 賽博龐克 Cyberpunk
 ## Client API
