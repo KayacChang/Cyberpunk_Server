@@ -10,6 +10,7 @@ type InitRequest struct {
 
 // InitData ...
 func (c *InitRequest) InitData(r *http.Request) {
+	c.Token = r.Header.Get("Authorization")
 }
 
 // InitRespon ...
