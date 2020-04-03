@@ -2,11 +2,12 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 
-	"github.com/YWJSonic/ServerUtility/code"
-	"github.com/YWJSonic/ServerUtility/dbservice"
-	"github.com/YWJSonic/ServerUtility/foundation"
-	"github.com/YWJSonic/ServerUtility/messagehandle"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/dbinfo"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/dbservice"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
 )
 
 // GetSetting get db setting
@@ -76,70 +77,10 @@ func UpdateAttach(db *sql.DB, args ...interface{}) messagehandle.ErrorMsg {
 	return err
 }
 
-// GetAccountInfo Check Account existence and get
-func GetAccountInfo(db *sql.DB, account string) ([]map[string]interface{}, messagehandle.ErrorMsg) {
-	result, err := dbservice.CallReadOutMap(db, "AccountGet_Read", account)
-	return result, err
-}
-
-// NewAccount new goruting set new Account
-func NewAccount(db *sql.DB, args ...interface{}) { //messagehandle.ErrorMsg {
-	dbservice.CallWrite(
-		db,
-		dbservice.MakeProcedureQueryStr("AccountNew_Write", len(args)),
-		args...,
-	)
-}
-
-// UpdateAccount update
-func UpdateAccount(db *sql.DB, args ...interface{}) messagehandle.ErrorMsg {
-	_, err := dbservice.CallWrite(db, dbservice.MakeProcedureQueryStr("AccountSet_Update", len(args)), args...)
+// SetLog new goruting set log
+func SetLog(db *sql.DB, account string, playerID, time int64, activityEvent uint8, iValue1, iValue2, iValue3 int64, sValue1, sValue2, sValue3, msg string) messagehandle.ErrorMsg {
+	tableName := foundation.ServerNow().Format("20060102")
+	query := fmt.Sprintf("INSERT INTO `%s` VALUE(NULL,\"%s\",%d,%d, %d, %d,%d,%d,\"%s\",\"%s\",\"%s\",\"%s\");", tableName, account, playerID, time, activityEvent, iValue1, iValue2, iValue3, sValue1, sValue2, sValue3, msg)
+	_, err := dbinfo.CallWrite(db, query)
 	return err
-}
-
-// NewGameAccount gameaccount, money, gametoken
-func NewGameAccount(db *sql.DB, args ...interface{}) (int64, messagehandle.ErrorMsg) {
-	QuertStr := "INSERT INTO gameaccount VALUE (NULL,"
-	if len(args) > 0 {
-		for range args {
-			QuertStr += "?,"
-		}
-		QuertStr = QuertStr[:len(QuertStr)-1]
-	}
-	QuertStr += ");"
-
-	request, err := dbservice.Exec(db, QuertStr, args...)
-	if err.ErrorCode != code.OK {
-		err.ErrorCode = code.FailedPrecondition
-		err.Msg = "NewGameAccountError"
-		messagehandle.ErrorLogPrintln("NewGameAccount-1", err, QuertStr, args)
-		return -1, err
-	}
-	playerID, errMsg := request.LastInsertId()
-	if errMsg != nil {
-		messagehandle.ErrorLogPrintln("NewGameAccount-2", errMsg)
-	}
-	// err := messagehandle.New()
-	return playerID, err
-}
-
-// GetPlayerInfoByGameAccount ...
-func GetPlayerInfoByGameAccount(db *sql.DB, gameAccount string) ([]map[string]interface{}, messagehandle.ErrorMsg) {
-	result, err := dbservice.CallReadOutMap(db, "GameAccountGet_Read", gameAccount)
-	return result, err
-}
-
-// GetPlayerInfoByPlayerID ...
-func GetPlayerInfoByPlayerID(db *sql.DB, playerID int64) (interface{}, messagehandle.ErrorMsg) {
-	result, err := dbservice.CallReadOutMap(db, "GameAccountGet_Read", playerID)
-	return result, err
-}
-
-// UpdatePlayerInfo ...
-func UpdatePlayerInfo(db *sql.DB, args ...interface{}) {
-	dbservice.CallWrite(
-		db,
-		dbservice.MakeProcedureQueryStr("GameAccountSet_Update", len(args)),
-		args...,
-	)
 }

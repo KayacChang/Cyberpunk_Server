@@ -1,6 +1,6 @@
 package gameattach
 
-import "github.com/YWJSonic/ServerUtility/attach"
+import "gitlab.fbk168.com/gamedevjp/backend-utility/utility/attach"
 
 // NewAttach ...
 func NewAttach(userID int64) attach.IAttach {

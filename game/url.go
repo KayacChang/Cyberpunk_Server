@@ -4,15 +4,21 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
+
+	"github.com/YWJSonic/GameServer/cyberpunk/game/constants"
+	"github.com/YWJSonic/GameServer/cyberpunk/game/db"
+
 	"github.com/YWJSonic/GameServer/cyberpunk/game/protocol"
-	"github.com/YWJSonic/ServerUtility/code"
-	"github.com/YWJSonic/ServerUtility/httprouter"
-	"github.com/YWJSonic/ServerUtility/igame"
-	"github.com/YWJSonic/ServerUtility/messagehandle"
-	"github.com/YWJSonic/ServerUtility/socket"
 	"github.com/gorilla/websocket"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/code"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/httprouter"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
 )
 
 func (g *Game) createNewSocket(w http.ResponseWriter, r *http.Request) {
@@ -72,6 +78,7 @@ func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 
 func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var proto protocol.GameRequest
+	var oldMoney int64
 	proto.InitData(r)
 
 	user, _, err := g.GetUser(proto.Token)
@@ -107,6 +114,7 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 		return
 	}
 
+	oldMoney = user.UserGameInfo.Money
 	// get game result
 	RuleRequest := &igame.RuleRequest{
 		BetIndex: proto.BetIndex,
@@ -117,6 +125,27 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 
 	resultMap := result.GameResult
 	resultMap["playermoney"] = user.UserGameInfo.GetMoney()
+
+	msg := foundation.JSONToString(result.GameResult)
+	msg = strings.ReplaceAll(msg, "\"", "\\\"")
+	errMsg := db.SetLog(
+		g.Server.DBConn("logdb"),
+		user.UserGameInfo.IDStr,
+		0,
+		time.Now().Unix(),
+		constants.ActionGameResult,
+		oldMoney,
+		user.UserGameInfo.Money,
+		result.Totalwinscore,
+		"",
+		"",
+		"",
+		msg,
+	)
+	if errMsg.ErrorCode != code.OK {
+		g.Server.HTTPResponse(w, resultMap, errMsg)
+		return
+	}
 	g.EndOrder(proto.Token, order)
 	g.Server.HTTPResponse(w, resultMap, messagehandle.New())
 }

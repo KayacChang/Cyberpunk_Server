@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 
 	"github.com/YWJSonic/GameServer/cyberpunk/game/gamerule"
-	"github.com/YWJSonic/ServerUtility/foundation"
-	"github.com/YWJSonic/ServerUtility/foundation/fileload"
-	"github.com/YWJSonic/ServerUtility/iserver"
-	"github.com/YWJSonic/ServerUtility/restfult"
-	"github.com/YWJSonic/ServerUtility/socket"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation/fileload"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/restfult"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
 )
 
 // NewGameServer ...
@@ -40,9 +40,8 @@ func NewGameServer() {
 
 	// start DB service
 	setting := gameserver.Setting.DBSetting()
-	gameserver.LaunchDB("gameDB", setting)
-	gameserver.LaunchDB("logDB", setting)
-	gameserver.LaunchDB("payDB", setting)
+	gameserver.LaunchDB("gamedb", setting)
+	gameserver.LaunchDB("logdb", setting)
 
 	// start restful service
 	go gameserver.LaunchRestfult(game.RESTfulURLs())
