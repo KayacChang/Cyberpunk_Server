@@ -3,8 +3,6 @@ package game
 import (
 	"errors"
 
-	"github.com/YWJSonic/GameServer/cyberpunk/game/cache"
-	"github.com/YWJSonic/GameServer/cyberpunk/game/gameattach"
 	"github.com/golang/protobuf/ptypes"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
@@ -13,6 +11,8 @@ import (
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/thirdparty/transaction/protoc"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/user"
+	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/cache"
+	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/gameattach"
 )
 
 // Game ...

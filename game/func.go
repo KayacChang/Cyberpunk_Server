@@ -3,12 +3,12 @@ package game
 import (
 	"encoding/json"
 
-	"github.com/YWJSonic/GameServer/cyberpunk/game/gamerule"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation/fileload"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/restfult"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
+	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/gamerule"
 )
 
 // NewGameServer ...

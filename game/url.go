@@ -7,18 +7,16 @@ import (
 	"strings"
 	"time"
 
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
-
-	"github.com/YWJSonic/GameServer/cyberpunk/game/constants"
-	"github.com/YWJSonic/GameServer/cyberpunk/game/db"
-
-	"github.com/YWJSonic/GameServer/cyberpunk/game/protocol"
 	"github.com/gorilla/websocket"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/code"
+	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/httprouter"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/messagehandle"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
+	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/constants"
+	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/db"
+	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/protocol"
 )
 
 func (g *Game) createNewSocket(w http.ResponseWriter, r *http.Request) {
