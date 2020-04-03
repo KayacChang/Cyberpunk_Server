@@ -6,6 +6,7 @@ import (
 	"github.com/golang/protobuf/ptypes"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/iserver"
+	_ "gitlab.fbk168.com/gamedevjp/backend-utility/utility/mysql"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/playerinfo"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/restfult"
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
