@@ -24,7 +24,7 @@ Authorization: <token>
             "betratelinkindex":[]int
         },
         "player":{
-            "gameaccount":string,
+            "gametypeid":string,
             "id":string,
             "money":int
         },
@@ -45,7 +45,7 @@ Authorization: <token>
 | betrate             | []int   | 可下注金額             |
 | betratedefaultindex | int     | 預設下注顯示(表演用)   |
 | betratelinkindex    | []int   | 下注金額快捷鍵(表演用) |
-| gameaccount         | string  | 遊戲類型ID             |
+| gametypeid          | string  | 遊戲類型ID             |
 | id                  | string  | 玩家遊戲ID             |
 | money               | int     | 玩家現有金額           |
 | freereel            | [][]int | 免費遊戲輪帶           |
