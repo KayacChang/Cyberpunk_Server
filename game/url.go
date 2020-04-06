@@ -16,7 +16,7 @@ import (
 	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/socket"
 	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/constants"
 	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/db"
-	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/protocol"
+	"gitlab.fbk168.com/gamedevjp/cyberpunk/server/game/protoc"
 )
 
 func (g *Game) createNewSocket(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +50,7 @@ func (g *Game) SocketMessageHandle(msg socket.Message) error {
 
 func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	// var result = make(map[string]interface{})
-	var proto protocol.InitRequest
+	var proto protoc.InitRequest
 	proto.InitData(r)
 
 	// get user
@@ -75,7 +75,7 @@ func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 }
 
 func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var proto protocol.GameRequest
+	var proto protoc.GameRequest
 	var oldMoney int64
 	proto.InitData(r)
 
