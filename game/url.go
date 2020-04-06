@@ -65,9 +65,9 @@ func (g *Game) gameinit(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 	result := map[string]interface{}{
 		"betrate": g.IGameRule.GetBetSetting(),
 		"player": map[string]interface{}{
-			"gameaccount": g.IGameRule.GetGameTypeID(),
-			"id":          user.UserGameInfo.ID,
-			"money":       user.UserGameInfo.GetMoney(),
+			"gametypeid": g.IGameRule.GetGameTypeID(),
+			"id":         user.UserGameInfo.IDStr,
+			"money":      user.UserGameInfo.GetMoney(),
 		},
 		"reel": g.IGameRule.GetReel(),
 	}
