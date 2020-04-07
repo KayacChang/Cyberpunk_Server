@@ -1,8 +1,8 @@
 package gamerule
 
 import (
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
+	"github.com/YWJSonic/ServerUtility/foundation"
+	"github.com/YWJSonic/ServerUtility/igame"
 )
 
 // Rule ...

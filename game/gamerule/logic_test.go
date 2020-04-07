@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"testing"
 
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/foundation/fileload"
-	"gitlab.fbk168.com/gamedevjp/backend-utility/utility/igame"
+	"github.com/YWJSonic/ServerUtility/foundation"
+	"github.com/YWJSonic/ServerUtility/foundation/fileload"
+	"github.com/YWJSonic/ServerUtility/igame"
 )
 
 func TestNew(t *testing.T) {
