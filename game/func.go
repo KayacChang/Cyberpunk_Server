@@ -29,7 +29,6 @@ func NewGameServer() {
 	var game = &Game{
 		IGameRule: gameRule,
 		Server:    gameserver,
-		// ProtocolMap: protocol.NewProtocolMap(),
 	}
 	gameserver.Restfult = restfult.NewRestfultService()
 	gameserver.Socket = socket.NewSocket()
@@ -45,7 +44,7 @@ func NewGameServer() {
 
 	// start restful service
 	go gameserver.LaunchRestfult(game.RESTfulURLs())
-	go gameserver.LaunchSocket(game.SocketURLs())
+	// go gameserver.LaunchSocket(game.SocketURLs())
 
 	<-gameserver.ShotDown
 }

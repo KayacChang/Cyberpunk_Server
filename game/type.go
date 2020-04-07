@@ -78,7 +78,6 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 			UserServerInfo: &playerinfo.AccountInfo{},
 			UserGameInfo: &playerinfo.Info{
 				IDStr:  "devtest",
-				Money:  10000000,
 				MoneyU: 10000000,
 			},
 		}, nil, nil
@@ -110,7 +109,6 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 		UserServerInfo: &playerinfo.AccountInfo{},
 		UserGameInfo: &playerinfo.Info{
 			IDStr:  userProto.GetUserId(),
-			Money:  int64(userProto.GetBalance()),
 			MoneyU: userProto.GetBalance(),
 		},
 	}, nil, nil
