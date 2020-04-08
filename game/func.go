@@ -12,9 +12,8 @@ import (
 )
 
 // NewGameServer ...
-func NewGameServer() {
+func NewGameServer(jsStr string) {
 
-	jsStr := fileload.Load("./file/config.json")
 	config := foundation.StringToJSON(jsStr)
 	baseSetting := iserver.NewSetting()
 	baseSetting.SetData(config)
