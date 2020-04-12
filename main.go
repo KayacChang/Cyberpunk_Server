@@ -29,6 +29,7 @@ type ENV struct {
 	APIURL string `json:"TransferURL"`
 
 	AccountEncode string `json:"AccountEncodeStr"`
+	GameTypeID    string `json:"GameTypeID"`
 }
 
 func main() {
@@ -56,6 +57,7 @@ func main() {
 		APIURL: env.GetEnvAsString("API_URL"),
 
 		AccountEncode: env.GetEnvAsString("ACCOUNT_ENCODE"),
+		GameTypeID:    env.GetEnvAsString("GAME_TYPEID"),
 	}
 
 	jsonbyte, err := json.Marshal(config)

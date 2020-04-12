@@ -19,7 +19,9 @@ func NewGameServer(jsStr string) {
 	baseSetting.SetData(config)
 
 	gamejsStr := fileload.Load("./file/gameconfig.json")
-	var gameRule = &gamerule.Rule{}
+	var gameRule = &gamerule.Rule{
+		GameTypeID: config["GameTypeID"].(string),
+	}
 	if err := json.Unmarshal([]byte(gamejsStr), &gameRule); err != nil {
 		panic(err)
 	}
