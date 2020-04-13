@@ -44,7 +44,17 @@ func NewGameServer(jsStr string) {
 	gameserver.LaunchDB("logdb", setting)
 
 	// start restful service
-	go gameserver.LaunchRestfult(game.RESTfulURLs())
+
+	if config["Https"].(bool) {
+		cert := config["Cert"].(string)
+		key := config["Key"].(string)
+
+		go gameserver.LaunchHTTPS(game.RESTfulURLs(), cert, key)
+
+	} else {
+		go gameserver.LaunchRestfult(game.RESTfulURLs())
+	}
+
 	// go gameserver.LaunchSocket(game.SocketURLs())
 
 	<-gameserver.ShotDown
