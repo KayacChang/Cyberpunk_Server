@@ -19,6 +19,10 @@ type ENV struct {
 	ServerHTTPPort   string `json:"PORT"`
 	ServerSocketPort string `json:"SocketPORT"`
 
+	HTTPS bool   `json:"Https"`
+	Cert  string `json:"Cert"`
+	Key   string `json:"Key"`
+
 	DBIP       string `json:"DBIP"`
 	DBPort     string `json:"DBPORT"`
 	DBUser     string `json:"DBUser"`
@@ -46,6 +50,10 @@ func main() {
 		ServerIP:         env.GetEnvAsString("SERVER_IP"),
 		ServerHTTPPort:   env.GetEnvAsString("SERVER_HTTP_PORT"),
 		ServerSocketPort: env.GetEnvAsString("SERVER_SOCKET_PORT"),
+
+		HTTPS: env.GetEnvAsBool("SERVER_HTTPS"),
+		Cert:  env.GetEnvAsString("SERVER_CERT"),
+		Key:   env.GetEnvAsString("SERVER_KEY"),
 
 		DBIP:       env.GetEnvAsString("DB_IP"),
 		DBPort:     env.GetEnvAsString("DB_PORT"),
