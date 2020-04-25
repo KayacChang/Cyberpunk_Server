@@ -33,6 +33,7 @@ type ENV struct {
 	APIURL string `json:"TransferURL"`
 
 	AccountEncode string `json:"AccountEncodeStr"`
+	ServerMod     string `json:"ServerMod"`
 	GameTypeID    string `json:"GameTypeID"`
 }
 
@@ -65,6 +66,7 @@ func main() {
 		APIURL: env.GetEnvAsString("API_URL"),
 
 		AccountEncode: env.GetEnvAsString("ACCOUNT_ENCODE"),
+		ServerMod:     env.GetEnvAsString("SERVER_MOD"),
 		GameTypeID:    env.GetEnvAsString("GAME_TYPEID"),
 	}
 

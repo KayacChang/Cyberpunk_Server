@@ -14,7 +14,7 @@ type Rule struct {
 	BetRateLinkIndex    []int64   `json:"BetRateLinkIndex"`
 	FreeGameCountArray  []int     `json:"FreeGameCountArray"`
 	FreeReel            [][]int   `json:"FreeReel"`
-	GameIndex           int       `json:"GameIndex"`
+	GameIndex           int64     `json:"GameIndex"`
 	IsAttachInit        bool      `json:"IsAttachInit"`
 	ItemResults         [][][]int `json:"ItemResults"`
 	Items               []int     `json:"Items"`
@@ -32,6 +32,10 @@ type Rule struct {
 	WildsItemIndex      []int     `json:"WildsItemIndex"`
 	WinBetRateLimit     int64     `json:"WinBetRateLimit"`
 	WinScoreLimit       int64     `json:"WinScoreLimit"`
+}
+
+func (r *Rule) GetGameIndex() int64 {
+	return r.GameIndex
 }
 
 // GetGameTypeID ...
