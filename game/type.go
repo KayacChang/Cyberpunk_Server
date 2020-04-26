@@ -92,7 +92,7 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 	if err != nil {
 		if res != nil {
 			errorProto := &protoc.Error{}
-			if jserr := errorProto.XXX_Unmarshal(res); jserr != nil {
+			if jserr := proto.Unmarshal(res, errorProto); jserr != nil {
 				return nil, nil, jserr
 			}
 			return nil, errorProto, err
@@ -101,7 +101,7 @@ func (g *Game) GetUser(userToken string) (*user.Info, *protoc.Error, error) {
 	}
 
 	userProto := &protoc.User{}
-	if jserr := userProto.XXX_Unmarshal(res); jserr != nil {
+	if jserr := proto.Unmarshal(res, userProto); jserr != nil {
 		return nil, nil, jserr
 	}
 
@@ -130,6 +130,7 @@ func (g *Game) NewOrder(token, userIDStr string, betMoney int64) (*protoc.Order,
 		GameId: g.IGameRule.GetGameTypeID(),
 		Bet:    uint64(betMoney),
 	}
+	fmt.Println(orderProto)
 	payload, err := proto.Marshal(orderProto)
 	if err != nil {
 		return nil, nil, err
@@ -139,7 +140,7 @@ func (g *Game) NewOrder(token, userIDStr string, betMoney int64) (*protoc.Order,
 	if err != nil {
 		if res != nil {
 			errorProto := &protoc.Error{}
-			if jserr := errorProto.XXX_Unmarshal(res); jserr != nil {
+			if jserr := proto.Unmarshal(res, errorProto); jserr != nil {
 				return nil, nil, jserr
 			}
 			return nil, errorProto, err
@@ -147,7 +148,7 @@ func (g *Game) NewOrder(token, userIDStr string, betMoney int64) (*protoc.Order,
 		return nil, nil, err
 	}
 
-	if jserr := orderProto.XXX_Unmarshal(res); jserr != nil {
+	if jserr := proto.Unmarshal(res, orderProto); jserr != nil {
 		return nil, nil, jserr
 	}
 	return orderProto, nil, nil
@@ -170,7 +171,7 @@ func (g *Game) EndOrder(token string, orderProto *protoc.Order) (*protoc.Order, 
 	if err != nil {
 		if res != nil {
 			errorProto := &protoc.Error{}
-			if jserr := errorProto.XXX_Unmarshal(res); jserr != nil {
+			if jserr := proto.Unmarshal(res, errorProto); jserr != nil {
 				return nil, nil, jserr
 			}
 			return nil, errorProto, err
@@ -178,7 +179,7 @@ func (g *Game) EndOrder(token string, orderProto *protoc.Order) (*protoc.Order, 
 		return nil, nil, err
 	}
 
-	if jserr := orderProto.XXX_Unmarshal(res); jserr != nil {
+	if jserr := proto.Unmarshal(res, orderProto); jserr != nil {
 		return nil, nil, jserr
 	}
 	return orderProto, nil, nil

@@ -1,7 +1,6 @@
 {
 	"Version": "0.0.1",
 	"GameIndex": 8,
-	"GameTypeID": "eba74ad2c25991346e73e330dbea12f4",
 	"BetRate": [200, 1000, 10000, 100000, 500000, 1000000],
 	"BetRateLinkIndex": [0, 1, 2, 3, 4],
 	"BetRateDefaultIndex": 1,
