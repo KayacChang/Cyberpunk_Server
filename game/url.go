@@ -164,9 +164,23 @@ func (g *Game) gameresult(w http.ResponseWriter, r *http.Request, ps httprouter.
 		msg,
 	)
 	if errMsg.ErrorCode != code.OK {
-		g.Server.HTTPResponse(w, resultMap, errMsg)
+		fmt.Println(resultMap, errMsg)
+	}
+
+	_, errproto, err = g.EndOrder(proto.Token, order)
+	if errproto != nil {
+		errMsg := messagehandle.New()
+		errMsg.Msg = fmt.Sprintf("%d : %s:", errproto.GetCode(), errproto.GetMessage())
+		errMsg.ErrorCode = code.NewOrderError
+		g.Server.HTTPResponse(w, "", errMsg)
 		return
 	}
-	g.EndOrder(proto.Token, order)
+	if err != nil {
+		errMsg := messagehandle.New()
+		errMsg.Msg = err.Error()
+		errMsg.ErrorCode = code.NewOrderError
+		g.Server.HTTPResponse(w, "", errMsg)
+		return
+	}
 	g.Server.HTTPResponse(w, resultMap, messagehandle.New())
 }
